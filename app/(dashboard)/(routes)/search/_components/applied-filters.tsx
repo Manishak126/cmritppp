@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Category } from "@prisma/client";
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import {useSearchParams } from "next/navigation"
 
 interface AppliedFiltersProps{
     categories: Category[]
@@ -10,8 +10,6 @@ interface AppliedFiltersProps{
 
 export const AppliedFilters =({categories}:AppliedFiltersProps)=>{
 
-    const pathname= usePathname;
-    const router = useRouter;
     const searchParams= useSearchParams();
     
     const currentParams = Object.fromEntries(searchParams.entries());
@@ -30,13 +28,13 @@ export const AppliedFilters =({categories}:AppliedFiltersProps)=>{
     if(searchParams.size===0) return null
 
 
-    return
+    return(
     <>
         <div className="mt-4 flex items-center gap-4">
             {shiftTimingParams && Object.entries(shiftTimingParams).map(([key,value])=>(      
                 <>
                     {value.split(",").map(item=>(
-                        <Button variant={"outline"} type="button" key={item} className="flex items-center gap-x-2 text-neutral-500 px-2 py-1 rounded md bg-blue-50/80 border-blue-100 capitalized cursor-pointer hover:bg-blue-50">
+                        <Button variant={"outline"} type="button" key={`${item}-${key}`} className="flex items-center gap-x-2 text-neutral-500 px-2 py-1 rounded md bg-blue-50/80 border-blue-100 capitalized cursor-pointer hover:bg-blue-50">
                             {item}
                         </Button>
                     ))}
@@ -46,7 +44,7 @@ export const AppliedFilters =({categories}:AppliedFiltersProps)=>{
             {workingModesParams && Object.entries(workingModesParams).map(([key,value])=>(      
                     <>
                     {value.split(",").map(item=>(
-                        <Button variant={"outline"} type="button" key={item} className="flex items-center gap-x-2 text-neutral-500 px-2 py-1 rounded md bg-blue-50/80 border-blue-100 capitalized cursor-pointer hover:bg-blue-50">
+                        <Button variant={"outline"} type="button" key={`${item}-${key}`} className="flex items-center gap-x-2 text-neutral-500 px-2 py-1 rounded md bg-blue-50/80 border-blue-100 capitalized cursor-pointer hover:bg-blue-50">
                             {item}
                         </Button>
                     ))}
@@ -66,4 +64,5 @@ export const AppliedFilters =({categories}:AppliedFiltersProps)=>{
             </div>
         )}
     </>
+    )
 }

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
-import { Button } from "@/components/ui/button";  // Make sure this is imported and used somewhere
 
 import "./globals.css";
 import { ToastProvider } from "@/providers/toast-provider";

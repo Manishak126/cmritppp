@@ -8,7 +8,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Job } from "@prisma/client";
@@ -40,12 +39,13 @@ export const CategoryForm = ({ initialData, jobId, options }: CategoryFormProps)
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-        const response=await axios.patch(`/api/jobs/${jobId}`, values);
+        await axios.patch(`/api/jobs/${jobId}`, values);
         toast.success("Job Category Updated");
         toggleEditing();
         router.refresh();
     } catch (error) {
         toast.error("Something went wrong")
+        console.log(error);
     }
   };
 

@@ -10,10 +10,8 @@ import {
     FormField,
     FormItem,
     FormLabel,
-    FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
@@ -57,7 +55,7 @@ const CompanyCreatePage = () => {
                 <div>
                     <h1 className="text-2xl font-medium">Name your Company</h1>
                     <p className="text-sm text-neutral-500 mt-2 pb-5">
-                       WHat would you like to name your company? Don't worry, you can
+                       WHat would you like to name your company? Don&apos;t worry, you can
                         change this later.
                     </p>
                 </div>

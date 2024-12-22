@@ -23,20 +23,18 @@ export const CustomBreadCrumb = ({breadCrumbPage, breadCrumbItem}: CustomBreadCr
     </BreadcrumbItem>
 
     {breadCrumbItem && (
-        <>
-            {breadCrumbItem.map((item, i)=>(
-              <>
-                <BreadcrumbSeparator key={i}/>
-                <BreadcrumbItem key={i}>
-                <BreadcrumbLink href={item.link}>{item.label}</BreadcrumbLink>
-                </BreadcrumbItem>
+  <>
+    {breadCrumbItem.map((item, i) => (
+      <React.Fragment key={i}>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbLink href={item.link}>{item.label}</BreadcrumbLink>
+        </BreadcrumbItem>
+      </React.Fragment>
+    ))}
+  </>
+)}
 
-
-              </>
-            ))}
-
-        </>
-    ) }
 
   <BreadcrumbSeparator />
   <BreadcrumbItem>

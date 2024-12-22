@@ -2,11 +2,7 @@
 
 import {
   Card,
-  CardDescription,
-  CardHeader,
-  CardContent,
-  CardFooter,
-  CardTitle,
+  CardDescription
 } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { Company, Job } from "@prisma/client";

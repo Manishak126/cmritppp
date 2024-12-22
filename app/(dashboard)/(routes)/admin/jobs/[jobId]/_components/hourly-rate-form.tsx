@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { z } from "zod";
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
@@ -30,8 +29,7 @@ const formSchema = z.object({
 
 export const HourlyRateForm = ({ initialData, jobId }: HourlyRateFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [hourlyRate, setHourlyRate] = useState(initialData.hourlyRate || ""); // Synchronize with initial data
-  const router = useRouter();
+  const [hourlyRate, setHourlyRate] = useState(initialData.hourlyRate || ""); 
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -52,6 +50,8 @@ export const HourlyRateForm = ({ initialData, jobId }: HourlyRateFormProps) => {
       toggleEditing();
     } catch (error) {
       toast.error("Something went wrong while updating the hourly rate.");
+      console.log(error);
+
     }
   };
 

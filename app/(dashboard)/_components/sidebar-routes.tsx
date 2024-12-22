@@ -5,7 +5,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { SideBarRouteItem } from "./side-bar-route-item";
 import { Separator } from "@/components/ui/separator";
 import { useEffect, useState } from "react";
-import { DateFilter } from "./date-filter";
 import { CheckBoxContainer } from "./checkbox-container";
 import qs from "query-string"
 import Box from "@/components/ui/box";
@@ -117,7 +116,8 @@ export const SidebarRoutes = () => {
 
     const routes = isAdminPage ? adminRoutes : guestRoutes;
 
-    const handleShiftTimingChange = (shiftTimings: any[])=>{
+    const handleShiftTimingChange = (shiftTimings: string[])=>{
+        console.log(shiftTimings);
         const currentQueryParams= qs.parseUrl(window.location.href).query;
         const updatedQueryParams ={
             ...currentQueryParams,
@@ -134,7 +134,8 @@ export const SidebarRoutes = () => {
         router.push(url)
     }
 
-    const handleWorkingModes = (workModes: any[])=>{
+    const handleWorkingModes = (workModes: string[])=>{
+        console.log(workModes);
         const currentQueryParams= qs.parseUrl(window.location.href).query;
         const updatedQueryParams ={
             ...currentQueryParams,

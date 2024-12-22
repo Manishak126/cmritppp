@@ -44,6 +44,8 @@ export const WorkModeForm = ({ initialData, jobId, options }: WorkModeFormProps)
       router.refresh();
     } catch (error) {
       toast.error("Failed to update Work Mode.");
+      console.error(error);
+
     }
   };
 

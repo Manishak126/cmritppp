@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils";
 import { LucideIcon } from "lucide-react"
-import { Labrada } from "next/font/google";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 

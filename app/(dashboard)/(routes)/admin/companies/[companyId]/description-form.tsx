@@ -7,8 +7,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
 import axios from "axios";
 import toast from "react-hot-toast";
 // import { Company } from "@prisma/client";
@@ -25,14 +30,17 @@ const formSchema = z.object({
   description: z.string().min(1, { message: "Description is required" }),
 });
 
-export const CompanyDescriptionForm = ( { initialData, companyId }: CompanyDescriptionFormProps) => {
+export const CompanyDescriptionForm = ({
+  initialData,
+  companyId,
+}: CompanyDescriptionFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      description: initialData?.description || ""
+      description: initialData?.description || "",
     },
   });
 
@@ -40,12 +48,13 @@ export const CompanyDescriptionForm = ( { initialData, companyId }: CompanyDescr
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-        const response=await axios.patch(`/api/companies/${companyId}`, values);
-        toast.success("Company Updated");
-        toggleEditing();
-        router.refresh();
+      await axios.patch(`/api/companies/${companyId}`, values);
+      toast.success("Company Updated");
+      toggleEditing();
+      router.refresh();
     } catch (error) {
-        toast.error("Something went wrong")
+      toast.error("Something went wrong");
+      console.log(error);
     }
   };
 
@@ -61,7 +70,7 @@ export const CompanyDescriptionForm = ( { initialData, companyId }: CompanyDescr
           ) : (
             <>
               <Pencil className="w-4 h-4 mr-2" />
-              Edit 
+              Edit
             </>
           )}
         </Button>
@@ -69,8 +78,14 @@ export const CompanyDescriptionForm = ( { initialData, companyId }: CompanyDescr
 
       {/* Display the name if not editing */}
       {!isEditing && (
-        <p className={cn("text-sm mt-2",!initialData.description && "text-neutra-500 italic")}>
-          {initialData?.description || "No description available"}</p>
+        <p
+          className={cn(
+            "text-sm mt-2",
+            !initialData.description && "text-neutra-500 italic"
+          )}
+        >
+          {initialData?.description || "No description available"}
+        </p>
       )}
 
       {/* On editing mode display the input */}
@@ -83,7 +98,11 @@ export const CompanyDescriptionForm = ( { initialData, companyId }: CompanyDescr
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Textarea disabled={isSubmitting} placeholder="e.g. 'Deloitte'" {...field} />
+                    <Textarea
+                      disabled={isSubmitting}
+                      placeholder="e.g. 'Deloitte'"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

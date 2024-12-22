@@ -44,6 +44,7 @@ export const ShiftTimingForm = ({ initialData, jobId, options }: ShiftTimingForm
       router.refresh();
     } catch (error) {
       toast.error("Failed to update shift timing.");
+      console.error(error);
     }
   };
 

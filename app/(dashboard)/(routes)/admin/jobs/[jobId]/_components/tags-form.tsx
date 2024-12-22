@@ -7,12 +7,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Lightbulb, Loader2, Pencil, X } from "lucide-react";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Job } from "@prisma/client";
-import { ComboBox } from "@/components/ui/combo-box";
-import { Textarea } from "@/components/ui/textarea";
 import getGenerativeAIResponse from "@/scripts/aistudio";
 
 interface TagsFormProps {
@@ -37,16 +34,18 @@ export const TagsForm = ({ initialData, jobId }: TagsFormProps) => {
     defaultValues: initialData
   });
 
-  const { isSubmitting, isValid } = form.formState;
+  const { isSubmitting} = form.formState;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-        const response=await axios.patch(`/api/jobs/${jobId}`, values);
+        await axios.patch(`/api/jobs/${jobId}`, values);
         toast.success("Job Description Updated");
         toggleEditing();
         router.refresh();
     } catch (error) {
-        toast.error("Something went wrong")
+        toast.error("Something went wrong");
+        console.error(error);
+        
     }
   };
 

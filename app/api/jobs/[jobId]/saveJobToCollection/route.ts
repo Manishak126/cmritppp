@@ -12,7 +12,6 @@ export const PATCH = async (req: Request, { params }: Context) => {
   try {
     const { userId } = await auth(); // Fetch userId from auth
     const { jobId } =  await params; // Directly extract jobId from params
-    console.log(jobId);
 
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 });

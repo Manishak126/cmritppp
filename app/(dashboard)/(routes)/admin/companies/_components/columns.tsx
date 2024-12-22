@@ -1,6 +1,4 @@
 "use client";
-
-import { cn } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
 import {
   DropdownMenu,
@@ -9,7 +7,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { ArrowUpDown, MoreHorizontal, Pencil, Plus } from "lucide-react";
+import { ArrowUpDown, MoreHorizontal, Pencil} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 

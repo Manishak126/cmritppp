@@ -1,7 +1,13 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
-import { ArrowLeft, Building2, LayoutDashboard, ListChecks, File } from "lucide-react";
+import {
+  ArrowLeft,
+  Building2,
+  LayoutDashboard,
+  ListChecks,
+  File,
+} from "lucide-react";
 import Link from "next/link";
 import { JobPublishAction } from "./_components/job-publish-action";
 import { Banner } from "@/components/ui/banner";
@@ -46,13 +52,13 @@ const JobDetailsPage = async ({ params }: { params: { jobId: string } }) => {
   });
 
   const companies = await db.company.findMany({
-    where:{
-      userId
+    where: {
+      userId,
     },
-    orderBy:{
-      createdAt: "desc"
-    }
-  })
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 
   // Redirect if job not found
   if (!job) {
@@ -80,9 +86,15 @@ const JobDetailsPage = async ({ params }: { params: { jobId: string } }) => {
       <div className="flex items-center justify-between my-4">
         <div className="flex flex-col gap-y-2">
           <h1 className="text-2xl font-medium">Company Setup</h1>
-          <span className="text-sm text-neutral-500">Complete All Fields {completionText}</span>
+          <span className="text-sm text-neutral-500">
+            Complete All Fields {completionText}
+          </span>
         </div>
-        <JobPublishAction jobId={jobId} isPublished={job.isPublished} disabled={!isComplete} />
+        <JobPublishAction
+          jobId={jobId}
+          isPublished={job.isPublished}
+          disabled={!isComplete}
+        />
       </div>
 
       {/* Warning Banner */}
@@ -109,7 +121,7 @@ const JobDetailsPage = async ({ params }: { params: { jobId: string } }) => {
           <CategoryForm
             initialData={job}
             jobId={job.id}
-            options={categories.map((category: { name: any; id: any; }) => ({
+            options={categories.map((category) => ({
               label: category.name,
               value: category.id,
             }))}
@@ -142,62 +154,54 @@ const JobDetailsPage = async ({ params }: { params: { jobId: string } }) => {
               { label: "Office", value: "office" },
             ]}
           />
-          
         </div>
 
         {/* right container */}
-        <div className="space-y-6">       
+        <div className="space-y-6">
           <div>
-          <div className="flex items-center gap-x-2">
-            <IconBadge icon={ListChecks}/>
-             <h2 className="text-xl text-neutral-700">Job Requirements</h2>
-         </div>
+            <div className="flex items-center gap-x-2">
+              <IconBadge icon={ListChecks} />
+              <h2 className="text-xl text-neutral-700">Job Requirements</h2>
+            </div>
 
-          <TagsForm initialData={job} jobId={job.id}/>
-
+            <TagsForm initialData={job} jobId={job.id} />
           </div>
-          
-
-                  {/* company details*/}
-          <div>
-          <div className="flex items-center gap-x-2">
-            <IconBadge icon={Building2}/>
-             <h2 className="text-xl text-neutral-700">Company Details</h2>
-         </div>
 
           {/* company details*/}
-          <CompanyForm
-          initialData={job}
-          jobId={job.id}
-          options={companies.map((company: { name: any; id: any; }) => ({
-            label: company.name,
-            value: company.id,
-          }))}
-          />
-          </div>
-
-                  {/* attachments */}
           <div>
-          <div className="flex items-center gap-x-2">
-            <IconBadge icon={File}/>
-             <h2 className="text-xl text-neutral-700">Job Attachments</h2>
-         </div>
+            <div className="flex items-center gap-x-2">
+              <IconBadge icon={Building2} />
+              <h2 className="text-xl text-neutral-700">Company Details</h2>
+            </div>
+
+            {/* company details*/}
+            <CompanyForm
+              initialData={job}
+              jobId={job.id}
+              options={companies.map((company) => ({
+                label: company.name,
+                value: company.id,
+              }))}
+            />
           </div>
 
+          {/* attachments */}
+          <div>
+            <div className="flex items-center gap-x-2">
+              <IconBadge icon={File} />
+              <h2 className="text-xl text-neutral-700">Job Attachments</h2>
+            </div>
           </div>
-
         </div>
-
-        {/* description */}
-
-        <div className="col-span-2">
-            <JobDescription initialData={job} jobId={job.id}/>
-        </div>
-
-
       </div>
+
+      {/* description */}
+
+      <div className="col-span-2">
+        <JobDescription initialData={job} jobId={job.id} />
+      </div>
+    </div>
   );
 };
 
 export default JobDetailsPage;
-
