@@ -21,6 +21,7 @@ import { WorkModeForm } from "./_components/work-mode-form";
 import { TagsForm } from "./_components/tags-form";
 import { JobDescription } from "./_components/job-description";
 import { CompanyForm } from "./_components/company-form";
+import { QuestionForm } from "./_components/question-form";
 
 const JobDetailsPage = async ({ params }: { params: { jobId: string } }) => {
   // Await the params if necessary
@@ -191,6 +192,7 @@ const JobDetailsPage = async ({ params }: { params: { jobId: string } }) => {
               <IconBadge icon={File} />
               <h2 className="text-xl text-neutral-700">Job Attachments</h2>
             </div>
+            <QuestionForm initialData={job} jobId={job.id}/>
           </div>
         </div>
       </div>

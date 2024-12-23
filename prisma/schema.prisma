@@ -21,6 +21,7 @@ model Job{
   // company_name String
   title String
   description String?
+  question String?
   short_description String?
   imageUrl String?
   isPublished Boolean @default(false)

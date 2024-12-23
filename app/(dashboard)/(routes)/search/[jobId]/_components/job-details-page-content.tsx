@@ -1,16 +1,17 @@
 "use client";
 
 import Box from "@/components/ui/box";
+import { Button } from "@/components/ui/button";
 import { CustomBreadCrumb } from "@/components/ui/customBreadCrumb";
 import Preview from "@/components/ui/preview";
 import { Company, Job } from "@prisma/client";
-import { UserProfile } from "@prisma/client";
+// import { UserProfile } from "@prisma/client";
 import Link from "next/link";
 
 interface JobDetailsPageContentProps {
   job: Job & { company: Company | null };
   jobId: string;
-  userProfile: UserProfile | null;
+  // userProfile: UserProfile | null;
 }
 export const JobDetailsPageContent = ({
   job,
@@ -65,7 +66,7 @@ export const JobDetailsPageContent = ({
 
       {/* Description*/}
       <Box className="flex-col my-4 items-start justify-start px-4">
-              <h2 className="text-lg font-semibold">Description: </h2>
+              {/* <h2 className="text-2xl font-bold">Description</h2> */}
               <p className="font-sans">{job?.short_description}</p>
 
       </Box>
@@ -75,6 +76,17 @@ export const JobDetailsPageContent = ({
           <Preview value={job?.description}/>
         </Box>
       )}
+
+      <Box className="flex justify-center items-center w-full mt-10">
+        <Link href={`/search/${job.id}/resources`}>
+        <Button className="bg-transparent border  text-blue-600 hover:shadow-md hover:bg-blue-600 hover:text-white border-blue-600">
+          View Preparation Resources
+        </Button> 
+        </Link>
+       
+      </Box>
+
+
 
       
     </>
